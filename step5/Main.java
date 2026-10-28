@@ -1,0 +1,47 @@
+package step5;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class Main {
+    static List<Apple> mele = List.of(
+            new Apple(Color.GREEN, 150),
+            new Apple(Color.GREEN, 50),
+            new Apple(Color.RED, 250),
+            new Apple(Color.GREEN, 145.5),
+            new Apple(Color.RED, 75),
+            new Apple(Color.GREEN, 155));
+
+    public static void main(String[] args) {
+        List<Apple> green = filterApples(mele, apple -> Color.GREEN.equals(apple.getColor()));
+        List<Apple> pesanti = filterApples(mele, apple -> apple.getPeso() > 150);
+        List<Apple> red = filterApples(mele, apple -> Color.RED.equals(apple.getColor()));
+        for (Apple apple : green) {
+            System.out.println(apple.getColor() + " " + apple.getPeso());
+
+        }
+        for (Apple apple : red) {
+            System.out.println(apple.getColor() + " " + apple.getPeso());
+
+        }
+        for (Apple apple : pesanti) {
+            System.out.println("---pesanti--" + apple.getPeso() + " " + apple.getColor());
+        }
+
+    }
+
+    public static List<Apple> filterApples(List<Apple> inventory, Predicate<Apple> predicate) {
+        List<Apple> appleInventory = new ArrayList<>();
+
+        for (Apple apple : inventory) {
+            if (predicate.test(apple)) {
+                appleInventory.add(apple);
+
+            }
+        }
+        return appleInventory;
+
+    }
+
+}
